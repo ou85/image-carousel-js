@@ -7,7 +7,7 @@
   <title>Smooth Images Carousel</title>
 
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-  
+
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="carousel.css">
 
@@ -32,5 +32,32 @@
       aria-label="Image carousel"
     ></div>
   </main>
+
+
+  <div
+  class="image-viewer"
+  id="imageViewer"
+  aria-hidden="true"
+>
+  <button
+    class="image-viewer__close"
+    id="imageViewerClose"
+    type="button"
+    aria-label="Закрыть"
+  >
+    ×
+  </button>
+
+  <img
+    class="image-viewer__image"
+    id="imageViewerImage"
+    src=""
+    alt=""
+  >
+</div>
+
+
+
+
 </body>
 </html>

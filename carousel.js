@@ -11,25 +11,21 @@ const rowConfigs = [
     startRatio: 0,
     stepSeed: 7
   },
-
   {
     speed: 11,
     startRatio: 1 / 5,
     stepSeed: 1
   },
-
   {
     speed: 12,
     startRatio: 2 / 5,
     stepSeed: 5
   },
-
   {
     speed: 10,
     startRatio: 3 / 5,
     stepSeed: 11
   },
-
   {
     speed: 8,
     startRatio: 4 / 5,
@@ -44,6 +40,8 @@ const preloadedUrls = new Set();
 let slideWidth = 250;
 let resizeFrameId = null;
 let carouselIsVisible = true;
+
+let imageViewerIsOpen = false;
 
 function gcd(a, b) {
   let x = Math.abs(a);
@@ -320,3 +318,84 @@ window.addEventListener(
 );
 
 applySystemPauseState();
+
+// ========================================================
+
+const imageViewer = document.querySelector("#imageViewer");
+const imageViewerImage =
+  document.querySelector("#imageViewerImage");
+const imageViewerClose =
+  document.querySelector("#imageViewerClose");
+
+function openImageViewer(sourceImage) {
+  if (!imageViewer || !imageViewerImage) {
+    return;
+  }
+
+  imageViewerImage.src =
+    sourceImage.currentSrc || sourceImage.src;
+
+  imageViewerImage.alt =
+    sourceImage.alt || "Selected image";
+
+  imageViewerIsOpen = true;
+
+  imageViewer.classList.add("is-open");
+  imageViewer.setAttribute("aria-hidden", "false");
+
+  document.body.classList.add("image-viewer-open");
+
+  applySystemPauseState();
+}
+
+function closeImageViewer() {
+  if (!imageViewer || !imageViewerImage) {
+    return;
+  }
+
+  imageViewerIsOpen = false;
+
+  imageViewer.classList.remove("is-open");
+  imageViewer.setAttribute("aria-hidden", "true");
+
+  document.body.classList.remove("image-viewer-open");
+
+  applySystemPauseState();
+
+  window.setTimeout(() => {
+    if (!imageViewerIsOpen) {
+      imageViewerImage.src = "";
+      imageViewerImage.alt = "";
+    }
+  }, 350);
+}
+
+carousel?.addEventListener("click", (event) => {
+  const clickedImage = event.target.closest(".slide img");
+
+  if (!clickedImage) {
+    return;
+  }
+
+  openImageViewer(clickedImage);
+});
+
+imageViewerClose?.addEventListener(
+  "click",
+  closeImageViewer
+);
+
+imageViewer?.addEventListener("click", (event) => {
+  if (event.target === imageViewer) {
+    closeImageViewer();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (
+    event.key === "Escape" &&
+    imageViewerIsOpen
+  ) {
+    closeImageViewer();
+  }
+});
