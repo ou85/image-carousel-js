@@ -112,103 +112,35 @@
   }
 }
 
+/* =================================================================================== */
 
-/* ======================================================== */
-
-
-.slide img {
-  cursor: zoom-in;
+.carousel {
+  position: relative;
 }
 
-/* Затемнение всей страницы */
-.image-viewer {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 30px;
-  background: rgb(0 0 0 / 80%);
-
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  transition:
-    opacity 250ms ease,
-    visibility 250ms ease;
-}
-
-/* Открытое состояние */
-.image-viewer.is-open {
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-/* Увеличенная картинка */
-.image-viewer__image {
-  display: block;
-
-  max-width: 90vw;
-  max-height: 88vh;
-
-  width: auto;
-  height: auto;
-
-  object-fit: contain;
-  border-radius: 12px;
-
-  box-shadow: 0 20px 70px rgb(0 0 0 / 70%);
-
-  opacity: 0;
-
-  /*
-   * Изначально картинка находится ниже
-   * и немного уменьшена.
-   */
-  transform: translateY(70px) scale(0.8);
-
-  transition:
-    transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 250ms ease;
-}
-
-/* Картинка поднимается и увеличивается */
-.image-viewer.is-open .image-viewer__image {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-/* Кнопка закрытия */
-.image-viewer__close {
+.carousel-popup-image {
   position: absolute;
-  top: 18px;
-  right: 24px;
+  z-index: 1050;
 
-  width: 48px;
-  height: 48px;
+  display: block;
+  object-fit: cover;
 
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
+  border-radius: 10px;
+  box-shadow: 0 15px 45px rgb(0 0 0 / 70%);
 
-  background: rgb(255 255 255 / 15%);
-  color: white;
+  cursor: zoom-out;
+  pointer-events: auto;
 
-  font-size: 36px;
-  line-height: 44px;
+  transition:
+    left 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    top 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    width 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    height 350ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 200ms ease;
 
-  cursor: pointer;
+  will-change: left, top, width, height;
 }
 
-.image-viewer__close:hover {
-  background: rgb(255 255 255 / 25%);
-}
-
-body.image-viewer-open {
-  overflow: hidden;
+.carousel::after {
+  z-index: 100;
 }

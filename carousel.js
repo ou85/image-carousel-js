@@ -88,7 +88,8 @@ function optimizeCloudinaryUrl(url) {
 
   return url.replace(
     marker,
-    `${marker}c_fill,w_360,h_210,f_auto,q_auto/`
+    // `${marker}c_fill,w_600,h_350,f_auto,q_auto/`
+    `${marker}c_fill,w_800,h_600,f_auto,q_auto/`
   );
 }
 
@@ -319,55 +320,122 @@ window.addEventListener(
 
 applySystemPauseState();
 
-// ========================================================
+// ====================================================================
 
-const imageViewer = document.querySelector("#imageViewer");
-const imageViewerImage =
-  document.querySelector("#imageViewerImage");
-const imageViewerClose =
-  document.querySelector("#imageViewerClose");
+let popupImage = null;
+let popupSourceRect = null;
 
-function openImageViewer(sourceImage) {
-  if (!imageViewer || !imageViewerImage) {
+function closePopupImage() {
+  if (!popupImage) {
     return;
   }
 
-  imageViewerImage.src =
-    sourceImage.currentSrc || sourceImage.src;
+  popupImage.style.opacity = "0";
+  popupImage.style.transform = "translateY(20px) scale(0.9)";
 
-  imageViewerImage.alt =
-    sourceImage.alt || "Selected image";
-
-  imageViewerIsOpen = true;
-
-  imageViewer.classList.add("is-open");
-  imageViewer.setAttribute("aria-hidden", "false");
-
-  document.body.classList.add("image-viewer-open");
-
-  applySystemPauseState();
-}
-
-function closeImageViewer() {
-  if (!imageViewer || !imageViewerImage) {
-    return;
-  }
-
-  imageViewerIsOpen = false;
-
-  imageViewer.classList.remove("is-open");
-  imageViewer.setAttribute("aria-hidden", "true");
-
-  document.body.classList.remove("image-viewer-open");
-
-  applySystemPauseState();
+  const imageToRemove = popupImage;
+  popupImage = null;
+  popupSourceRect = null;
 
   window.setTimeout(() => {
-    if (!imageViewerIsOpen) {
-      imageViewerImage.src = "";
-      imageViewerImage.alt = "";
-    }
-  }, 350);
+    imageToRemove.remove();
+  }, 200);
+}
+
+function openPopupImage(sourceImage) {
+  if (!carousel) {
+    return;
+  }
+ 
+  if (popupImage) {
+    closePopupImage();
+  }
+
+  const carouselRect = carousel.getBoundingClientRect();
+  const imageRect = sourceImage.getBoundingClientRect();
+
+  const startLeft = imageRect.left - carouselRect.left;
+  const startTop = imageRect.top - carouselRect.top;
+
+  popupSourceRect = {
+    left: startLeft,
+    top: startTop,
+    width: imageRect.width,
+    height: imageRect.height
+  };
+
+  const image = document.createElement("img");
+
+  image.className = "carousel-popup-image";
+  image.src = sourceImage.currentSrc || sourceImage.src;
+  image.alt = sourceImage.alt || "";
+
+  image.style.left = `${startLeft}px`;
+  image.style.top = `${startTop}px`;
+  image.style.width = `${imageRect.width}px`;
+  image.style.height = `${imageRect.height}px`;
+
+  carousel.appendChild(image);
+  popupImage = image;
+
+  // Image scale
+  // const targetWidth = Math.min(
+  //   carousel.clientWidth * 0.55,
+  //   560
+  // );
+
+  // const aspectRatio =
+  //   imageRect.width / imageRect.height;
+
+  // const targetHeight = targetWidth / aspectRatio;
+
+  // const targetLeft =
+  //   (carousel.clientWidth - targetWidth) / 2;
+
+  // const targetTop = Math.max(
+  //   10,
+  //   // (carousel.clientHeight - targetHeight) / 2 - 100
+  //   // (carousel.clientHeight - targetHeight) / 2 - 45
+  //   (carousel.clientHeight - targetHeight) / 2
+  // );
+
+  // requestAnimationFrame(() => {
+  //   image.style.left = `${targetLeft}px`;
+  //   image.style.top = `${targetTop}px`;
+  //   image.style.width = `${targetWidth}px`;
+  //   image.style.height = `${targetHeight}px`;
+  // });
+
+
+      const targetWidth = Math.min(
+        800,
+        carousel.clientWidth - 20
+      );
+
+      const targetHeight = Math.min(
+        600,
+        carousel.clientHeight - 20
+      );
+
+      const targetLeft =
+        (carousel.clientWidth - targetWidth) / 2;
+
+      const targetTop =
+        (carousel.clientHeight - targetHeight) / 2;
+
+      requestAnimationFrame(() => {
+        image.style.left = `${targetLeft}px`;
+        image.style.top = `${targetTop}px`;
+        image.style.width = `${targetWidth}px`;
+        image.style.height = `${targetHeight}px`;
+      });
+
+
+  image.addEventListener(
+    "click",
+    closePopupImage,
+    { once: true }
+  );
 }
 
 carousel?.addEventListener("click", (event) => {
@@ -377,25 +445,11 @@ carousel?.addEventListener("click", (event) => {
     return;
   }
 
-  openImageViewer(clickedImage);
-});
-
-imageViewerClose?.addEventListener(
-  "click",
-  closeImageViewer
-);
-
-imageViewer?.addEventListener("click", (event) => {
-  if (event.target === imageViewer) {
-    closeImageViewer();
-  }
+  openPopupImage(clickedImage);
 });
 
 document.addEventListener("keydown", (event) => {
-  if (
-    event.key === "Escape" &&
-    imageViewerIsOpen
-  ) {
-    closeImageViewer();
+  if (event.key === "Escape") {
+    closePopupImage();
   }
 });
