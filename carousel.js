@@ -7,19 +7,33 @@ const PRELOAD_AHEAD_COUNT = 5;
 
 const rowConfigs = [
   {
-    speed: 11,
+    speed: 9,
     startRatio: 0,
+    stepSeed: 7
+  },
+
+  {
+    speed: 11,
+    startRatio: 1 / 5,
     stepSeed: 1
   },
+
   {
     speed: 12,
-    startRatio: 1 / 3,
+    startRatio: 2 / 5,
     stepSeed: 5
   },
+
   {
     speed: 10,
-    startRatio: 2 / 3,
+    startRatio: 3 / 5,
     stepSeed: 11
+  },
+
+  {
+    speed: 8,
+    startRatio: 4 / 5,
+    stepSeed: 17
   }
 ];
 
