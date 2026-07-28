@@ -124,7 +124,6 @@ window.CAROUSEL_IMAGES = ["https://res.cloudinary.com/dacsww4tg/image/upload/v17
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780446026/wallpapers/verdant_vista_by_lofipromt_dkglk46-fullview_jlbqk2.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780446027/wallpapers/golden_quiet_by_lofipromt_dl7sse1-fullview_urnhjy.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780300849/wallpapers/golden_fields_by_lofipromt_dkdam8p-pre.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1780300849/wallpapers/golden_fields_by_lofipromt_dkdam8p-pre.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1777612405/wallpapers/Hummingbird_in_flight_Jamaica_awoy8d.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780300848/wallpapers/BingWallpaper202605181518_sqqgem.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780300847/wallpapers/BingWallpaper202605181517_pspbhd.jpg",
@@ -220,7 +219,6 @@ window.CAROUSEL_IMAGES = ["https://res.cloudinary.com/dacsww4tg/image/upload/v17
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1767600246/wallpapers/bailey-zindel-NRQV-hBF10M-unsplash.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1767600246/wallpapers/pietro-de-grandi-T7K4aEPoGGk-unsplash.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1767600246/wallpapers/daniel-leone-v7daTKlZzaw-unsplash_vnqumz.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1767600246/wallpapers/daniel-leone-v7daTKlZzaw-unsplash_vnqumz.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1767600245/wallpapers/jonatan-pie-h8nxGssjQXs-unsplash_shnqee.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1767600245/wallpapers/alexander-slattery-LI748t0BK8w-unsplash.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1759206090/wallpapers/iceland-eyjafjallajokull-volcano-xv.jpg",
@@ -307,4 +305,6 @@ window.CAROUSEL_IMAGES = ["https://res.cloudinary.com/dacsww4tg/image/upload/v17
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1724979837/wallpapers/max-rive-blinded.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1724979837/wallpapers/mount-bromo-java-indonesia-a-starry-night.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1724979837/wallpapers/Three_Crew_Members_Capture_Intelsat_VI_-_GPN-2000-001035.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1724979836/wallpapers/serg-degtyarev-st-peter-bridge_eykczc.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1724979836/wallpapers/nat-geo-sunset.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1782867118/wallpapers/cinque-terre-national-park_jpczu9.jpg"];
