@@ -1,0 +1,131 @@
+:root {
+  --slide-width: 250px; 
+  --slide-height: 140px;
+
+  --image-width: 240px;
+  --image-height: 140px;
+
+  --row-gap: 10px;
+
+  --border-radius: 5px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #222;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+  width: 90%;
+  margin: auto;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--row-gap);
+
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.carousel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid inherit;
+  border-radius: inherit;
+
+  pointer-events: none;
+  z-index: 100;
+}
+
+
+.carousel.is-paused .slide-track {
+  animation-play-state: paused;
+}
+
+.carousel-row {
+  width: 100%;
+  height: var(--slide-height);
+  overflow: hidden;
+  position: relative;
+}
+
+
+.slide-track {
+  display: flex;
+  width: max-content;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+
+  animation-name: move-one-slide;
+  animation-duration: var(--step-duration, 8s);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+}
+
+.carousel-row:hover .slide-track {
+  animation-play-state: paused;
+}
+
+.slide {
+  flex: 0 0 var(--slide-width);
+  width: var(--slide-width);
+  height: var(--slide-height);
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.slide img {
+  display: block;
+
+  width: var(--image-width);
+  height: var(--image-height);
+
+  object-fit: cover;
+  border: 0;
+  border-radius: var(--border-radius);
+
+  user-select: none;
+}
+
+@keyframes move-one-slide {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-1 * var(--slide-width)), 0, 0);
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --slide-width: 210px;
+    --slide-height: 120px;
+    --image-width: 200px;
+    --image-height: 120px;
+    --row-gap: 10px;
+  }
+}
