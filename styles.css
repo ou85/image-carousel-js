@@ -1,3 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #222;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
 .clock {
     position: absolute;
     top: 50%;
@@ -7,8 +27,15 @@
     color: #17D4FE;
     text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px red;
     font-size: 3rem;
-    font-family: 'Orbitron', sans-serif;
-    letter-spacing: 7px;
+
+    /* font-family: 'Orbitron', sans-serif; */
+
+        font-family: "Oxanium", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+
+    letter-spacing: 0.4rem;
 
     z-index: 1000;
 
@@ -16,10 +43,21 @@
     height: 9rem;
 
     background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 1rem;
+    border-radius: 0.55rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+
+    transition: scale 0.3s ease;
+
+    cursor: none !important;
+}
+
+.clock:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+    transform: translate(-50%, -50%) scale(1.1);
+    border: 1px solid #17D4FE;
+    border-radius: 0.75rem;
 }

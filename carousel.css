@@ -10,25 +10,7 @@
   --border-radius: 5px;
 }
 
-* {
-  box-sizing: border-box;
-}
 
-html,
-body {
-  min-height: 100%;
-}
-
-body {
-  margin: 0;
-  background: #222;
-}
-
-.page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-}
 
 .carousel {
   width: 90%;
