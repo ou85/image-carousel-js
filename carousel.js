@@ -299,11 +299,6 @@ function createRowState(config) {
   return state;
 }
 
-// function clearCarousel() {
-//   rowStates.length = 0;
-//   carousel.innerHTML = "";
-// }
-
 function clearCarousel() {
   rowStates.forEach((state) => {
     state.animation?.cancel();

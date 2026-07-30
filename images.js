@@ -367,4 +367,9 @@ window.CAROUSEL_IMAGES = ["https://res.cloudinary.com/dacsww4tg/image/upload/v17
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703836/wallpapers/praha.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703834/wallpapers/veryovkina-cave.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703833/wallpapers/ngorongoro_conservation_area.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703828/wallpapers/new_mexico_ship-rock.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703828/wallpapers/swiss-landwasserviadukt-xcv.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703827/wallpapers/spain-ronda.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1723703827/wallpapers/denali_pational_park.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1723171397/wallpapers/annapurna_massive_panorama.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1782867118/wallpapers/cinque-terre-national-park_jpczu9.jpg"];
