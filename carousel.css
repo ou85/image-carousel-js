@@ -9,9 +9,6 @@
 
   --border-radius: 5px;
 }
-
-
-
 .carousel {
   width: 90%;
   margin: auto;
@@ -25,50 +22,31 @@
   border-radius: var(--border-radius);
   overflow: hidden;
 }
-
 .carousel::after {
   content: "";
   position: absolute;
   inset: 0;
 
-  border: 1px solid inherit;
+  border: 1px solid #222;
   border-radius: inherit;
 
   pointer-events: none;
   z-index: 100;
 }
-
-
-.carousel.is-paused .slide-track {
-  animation-play-state: paused;
-}
-
 .carousel-row {
   width: 100%;
   height: var(--slide-height);
   overflow: hidden;
   position: relative;
 }
-
-
 .slide-track {
   display: flex;
   width: max-content;
+
   transform: translate3d(0, 0, 0);
   will-change: transform;
   backface-visibility: hidden;
-
-  animation-name: move-one-slide;
-  animation-duration: var(--step-duration, 8s);
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-play-state: running;
 }
-
-.carousel-row:hover .slide-track {
-  animation-play-state: paused;
-}
-
 .slide {
   flex: 0 0 var(--slide-width);
   width: var(--slide-width);
@@ -78,7 +56,6 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
-
 .slide img {
   display: block;
 
@@ -91,17 +68,6 @@
 
   user-select: none;
 }
-
-@keyframes move-one-slide {
-  from {
-    transform: translate3d(0, 0, 0);
-  }
-
-  to {
-    transform: translate3d(calc(-1 * var(--slide-width)), 0, 0);
-  }
-}
-
 @media (max-width: 600px) {
   :root {
     --slide-width: 210px;
@@ -140,7 +106,6 @@
 
   will-change: left, top, width, height;
 }
-
 .carousel::after {
   z-index: 100;
 }

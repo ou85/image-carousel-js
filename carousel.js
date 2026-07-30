@@ -159,13 +159,8 @@ function getRequiredSlideCount(row) {
   );
 }
 
-function setRowDuration(state) {
-  const duration = slideWidth / state.speed;
-
-  state.track.style.setProperty(
-    "--step-duration",
-    `${duration}s`
-  );
+function getRowStepDuration(state) {
+  return (slideWidth / state.speed) * 1000;
 }
 
 function appendNextSlide(state) {
@@ -205,6 +200,55 @@ function recycleFirstSlide(state) {
   preloadAhead(state);
 }
 
+function startRowAnimation(state) {
+  if (state.animation) {
+    state.animation.cancel();
+  }
+
+  const animation = state.track.animate(
+    [
+      {
+        transform: "translate3d(0, 0, 0)"
+      },
+      {
+        transform:
+          `translate3d(${-slideWidth}px, 0, 0)`
+      }
+    ],
+    {
+      duration: getRowStepDuration(state),
+      easing: "linear",
+      fill: "forwards"
+    }
+  );
+
+  state.animation = animation;
+
+  animation.finished
+    .then(() => {
+
+      if (state.animation !== animation) {
+        return;
+      }
+
+      animation.cancel();
+      recycleFirstSlide(state);
+      startRowAnimation(state);
+
+      const shouldPause =
+        document.hidden ||
+        !carouselIsVisible ||
+        state.isHovered;
+
+      if (shouldPause) {
+        state.animation.pause();
+      }
+    })
+    .catch(() => {
+    });
+}
+
+
 function createRowState(config) {
   const row = document.createElement("div");
   row.className = "carousel-row";
@@ -219,23 +263,52 @@ function createRowState(config) {
     row,
     track,
     speed: config.speed,
-    startIndex: Math.floor(carouselImages.length * config.startRatio),
-    step: findCoprimeStep(carouselImages.length, config.stepSeed),
-    nextSequencePosition: 0
+
+    startIndex: Math.floor(
+      carouselImages.length * config.startRatio
+    ),
+
+    step: findCoprimeStep(
+      carouselImages.length,
+      config.stepSeed
+    ),
+
+    nextSequencePosition: 0,
+    animation: null,
+    isHovered: false
   };
 
   fillTrack(state);
-  setRowDuration(state);
   preloadAhead(state);
+  startRowAnimation(state);
 
-  track.addEventListener("animationiteration", () => {
-    recycleFirstSlide(state);
+
+
+
+  row.addEventListener("mouseenter", () => {
+    state.isHovered = true;
+    state.animation?.pause();
   });
+
+  row.addEventListener("mouseleave", () => {
+    state.isHovered = false;
+    applySystemPauseState();
+  });
+
 
   return state;
 }
 
+// function clearCarousel() {
+//   rowStates.length = 0;
+//   carousel.innerHTML = "";
+// }
+
 function clearCarousel() {
+  rowStates.forEach((state) => {
+    state.animation?.cancel();
+  });
+
   rowStates.length = 0;
   carousel.innerHTML = "";
 }
@@ -270,7 +343,22 @@ function applySystemPauseState() {
   const shouldPause =
     document.hidden || !carouselIsVisible;
 
-  carousel.classList.toggle("is-paused", shouldPause);
+  carousel.classList.toggle(
+    "is-paused",
+    shouldPause
+  );
+
+  rowStates.forEach((state) => {
+    if (!state.animation) {
+      return;
+    }
+
+    if (shouldPause || state.isHovered) {
+      state.animation.pause();
+    } else {
+      state.animation.play();
+    }
+  });
 }
 
 function handleVisibilityChange() {
@@ -378,57 +466,28 @@ function openPopupImage(sourceImage) {
   carousel.appendChild(image);
   popupImage = image;
 
-  // Image scale
-  // const targetWidth = Math.min(
-  //   carousel.clientWidth * 0.55,
-  //   560
-  // );
+  const targetWidth = Math.min(
+    800,
+    carousel.clientWidth - 20
+  );
 
-  // const aspectRatio =
-  //   imageRect.width / imageRect.height;
+  const targetHeight = Math.min(
+    600,
+    carousel.clientHeight - 20
+  );
 
-  // const targetHeight = targetWidth / aspectRatio;
+  const targetLeft =
+    (carousel.clientWidth - targetWidth) / 2;
 
-  // const targetLeft =
-  //   (carousel.clientWidth - targetWidth) / 2;
+  const targetTop =
+    (carousel.clientHeight - targetHeight) / 2;
 
-  // const targetTop = Math.max(
-  //   10,
-  //   // (carousel.clientHeight - targetHeight) / 2 - 100
-  //   // (carousel.clientHeight - targetHeight) / 2 - 45
-  //   (carousel.clientHeight - targetHeight) / 2
-  // );
-
-  // requestAnimationFrame(() => {
-  //   image.style.left = `${targetLeft}px`;
-  //   image.style.top = `${targetTop}px`;
-  //   image.style.width = `${targetWidth}px`;
-  //   image.style.height = `${targetHeight}px`;
-  // });
-
-
-      const targetWidth = Math.min(
-        800,
-        carousel.clientWidth - 20
-      );
-
-      const targetHeight = Math.min(
-        600,
-        carousel.clientHeight - 20
-      );
-
-      const targetLeft =
-        (carousel.clientWidth - targetWidth) / 2;
-
-      const targetTop =
-        (carousel.clientHeight - targetHeight) / 2;
-
-      requestAnimationFrame(() => {
-        image.style.left = `${targetLeft}px`;
-        image.style.top = `${targetTop}px`;
-        image.style.width = `${targetWidth}px`;
-        image.style.height = `${targetHeight}px`;
-      });
+  requestAnimationFrame(() => {
+    image.style.left = `${targetLeft}px`;
+    image.style.top = `${targetTop}px`;
+    image.style.width = `${targetWidth}px`;
+    image.style.height = `${targetHeight}px`;
+  });
 
 
   image.addEventListener(
