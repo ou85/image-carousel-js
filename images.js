@@ -656,5 +656,6 @@ function shuffleArray(array) {
     [result[i], result[j]] = [result[j], result[i]];
   }
   return result;
+}
 
 window.CAROUSEL_IMAGES = shuffleArray(images);
