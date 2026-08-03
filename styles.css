@@ -62,7 +62,7 @@ body {
     border-radius: 0.75rem;
 } */
 
-.clock:hover {
+/* .clock:hover {
     background-color: rgba(0, 0, 0, 0.85);
     transform: translate(-50%, -50%) scale(1.25);
 
@@ -76,4 +76,32 @@ body {
         ;
 
     border-radius: 0.75rem;
+} */
+
+
+.clock:hover {
+	height: calc(100px + 4vw);
+	width: calc(150px + 10vw);
+	border: calc(1px + 0.2vw) solid transparent;
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	background-size: cover;
+	box-sizing: border-box;
+	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  
+	border-radius: 1rem;
+  
+	--img-url: url(https://res.cloudinary.com/dacsww4tg/image/upload/c_fill,w_1800,h_400,f_auto,q_auto/v1708435805/wallpapers/1626032_k7drtw.png);
+	
+  /* background-image: var(--img-url), linear-gradient(#f9f047, #0fd850); */
+  /* background-image: var(--img-url), linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5); */
+  background-image: var(--img-url), linear-gradient( 
+      to bottom right,
+      #D60000,  
+      #56189C,
+      #304FFF, 
+      #00C752 
+    );
+
+  transform: translate(-50%, -50%) scale(1.25);
 }
