@@ -543,7 +543,6 @@ const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/w
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708437077/wallpapers/khamkeo-vilaysing-lP1RhcNrENM-unsplash_r0as5m.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708437075/wallpapers/matheus-kohler-6J_qm8DJWnY-unsplash_glgmhk.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436819/wallpapers/Web_capture_17-8-2023_194636_www.bing.com_ecgu3f.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436285/wallpapers/Bing-1920x1200_lnuad4.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436290/wallpapers/apple_blueprint_epzofh.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436810/wallpapers/2018020116551755_P1257705_2cc2ffccO_y1tmmd.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436802/wallpapers/wp8531343-windows-4k-wallpapers_su2oyb.jpg",
@@ -552,7 +551,6 @@ const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/w
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436294/wallpapers/1ms-205464_pfbbiw.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436291/wallpapers/2606410_x52ruw.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436287/wallpapers/IMG_3821_uqnlow.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436286/wallpapers/IMG_3040_pw9jc7.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436285/wallpapers/Typographic-aers.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436816/wallpapers/1_mm7crn.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436814/wallpapers/2_laqlli.jpg",
@@ -565,7 +563,6 @@ const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/w
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436275/wallpapers/500_-_AtomicZen_hrvfhv.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436269/wallpapers/BingWallpaper-2012-12-10_pdfcsp.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436268/wallpapers/david-b-t1JFqYIaVJs-unsplash_mckq1d.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436280/wallpapers/wpapers_ru_Sydney-Opera-House_dmuhdy.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436265/wallpapers/atul-vinayak-hZioHCEWSAE-unsplash_opd9se.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436260/wallpapers/mohammad-alizade-4wzRuAb-KWs-unsplash_bbr5im.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436277/wallpapers/500_-_AtomicZen_-_Let_s_campfire_party_miv4aq.jpg",
@@ -627,6 +624,27 @@ const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/w
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435818/wallpapers/PANTONE-Color-of-the-Year-2021-v2_5120x2880_tmlvsl.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435817/wallpapers/PANTONE-wallhaven-76xwwo.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435817/wallpapers/wallhaven-n6z13x_pgyoxu.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435815/wallpapers/CD58C0813A_nzlcxn.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435815/wallpapers/BingWallpaper_28_w8k1m8.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435813/wallpapers/1057222_luiov7.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435811/wallpapers/1542163_2_yd6ru4.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435811/wallpapers/1542354_zmrz7l.png",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435810/wallpapers/5bef50b905a2a_aexif3.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435808/wallpapers/airplanes-15381-1920x1200_fjqsgi.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435807/wallpapers/New_Zealand_Desktop_Wallpapers_xrcacg.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435808/wallpapers/hd_wallpaper_10754_h3vc1k.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435807/wallpapers/QZMKAI_lltjyk.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435805/wallpapers/1626032_k7drtw.png",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435803/wallpapers/1625994_uvyzhb.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435803/wallpapers/BingWallpaper_38_bzmcds.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435802/wallpapers/BingWallpaper-2020-06-16_irsavk.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435801/wallpapers/BingWallpaper-2020-06-10_ighvue.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435800/wallpapers/BingWallpaper-2020-06-04_acjdah.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435799/wallpapers/BingWallpaper-2020-06-12_ieqbxy.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435798/wallpapers/BingWallpaper-2020-06-01_yudlvk.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435797/wallpapers/BingWallpaper-2020-05-10_gkldkb.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435796/wallpapers/Kevin-Floerke_Uyuni_5_wfw3tg.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435794/wallpapers/uyuni_night_salt_iqrr8q.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1782867118/wallpapers/cinque-terre-national-park_jpczu9.jpg"];
 
 
@@ -635,10 +653,8 @@ function shuffleArray(array) {
   const result = [...array];
   for (let i = result.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-
     [result[i], result[j]] = [result[j], result[i]];
   }
   return result;
-}
 
 window.CAROUSEL_IMAGES = shuffleArray(images);
