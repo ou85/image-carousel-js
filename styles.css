@@ -55,9 +55,25 @@ body {
     cursor: none !important;
 }
 
-.clock:hover {
+/* .clock:hover {
     background-color: rgba(0, 0, 0, 0.85);
     transform: translate(-50%, -50%) scale(1.1);
     border: 1px solid #17D4FE;
+    border-radius: 0.75rem;
+} */
+
+.clock:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+    transform: translate(-50%, -50%) scale(1.25);
+
+    border-style: solid;
+    border-width: 3px;
+    border-color:
+        #D60000  
+        #56189C
+        #304FFF  
+        #00C752 
+        ;
+
     border-radius: 0.75rem;
 }
