@@ -1,6 +1,4 @@
-const carouselImages = Array.isArray(window.CAROUSEL_IMAGES)
-  ? window.CAROUSEL_IMAGES
-  : [];
+const carouselImages = Array.isArray(window.CAROUSEL_IMAGES) ? window.CAROUSEL_IMAGES : [];
 
 const BUFFER_SLIDES = 4;
 const PRELOAD_AHEAD_COUNT = 5;
@@ -9,28 +7,28 @@ const rowConfigs = [
   {
     speed: 9,
     startRatio: 0,
-    stepSeed: 7
+    stepSeed: 7,
   },
   {
     speed: 11,
     startRatio: 1 / 5,
-    stepSeed: 1
+    stepSeed: 1,
   },
   {
     speed: 12,
     startRatio: 2 / 5,
-    stepSeed: 5
+    stepSeed: 5,
   },
   {
     speed: 10,
     startRatio: 3 / 5,
-    stepSeed: 11
+    stepSeed: 11,
   },
   {
     speed: 8,
     startRatio: 4 / 5,
-    stepSeed: 17
-  }
+    stepSeed: 17,
+  },
 ];
 
 const carousel = document.querySelector("#carousel");
@@ -40,8 +38,6 @@ const preloadedUrls = new Set();
 let slideWidth = 250;
 let resizeFrameId = null;
 let carouselIsVisible = true;
-
-let imageViewerIsOpen = false;
 
 function gcd(a, b) {
   let x = Math.abs(a);
@@ -69,8 +65,7 @@ function findCoprimeStep(length, seed) {
 }
 
 function getCssNumber(variableName, fallback) {
-  const value = getComputedStyle(document.documentElement)
-    .getPropertyValue(variableName);
+  const value = getComputedStyle(document.documentElement).getPropertyValue(variableName);
 
   return Number.parseFloat(value) || fallback;
 }
@@ -89,15 +84,12 @@ function optimizeCloudinaryUrl(url) {
   return url.replace(
     marker,
     // `${marker}c_fill,w_600,h_350,f_auto,q_auto/`
-    `${marker}c_fill,w_800,h_600,f_auto,q_auto/`
+    `${marker}c_fill,w_800,h_600,f_auto,q_auto/`,
   );
 }
 
 function getImageIndex(state, sequencePosition) {
-  return (
-    state.startIndex +
-    sequencePosition * state.step
-  ) % carouselImages.length;
+  return (state.startIndex + sequencePosition * state.step) % carouselImages.length;
 }
 
 function getOptimizedImageUrl(imageIndex) {
@@ -120,10 +112,7 @@ function preloadImageByIndex(imageIndex) {
 
 function preloadAhead(state, count = PRELOAD_AHEAD_COUNT) {
   for (let offset = 0; offset < count; offset += 1) {
-    const imageIndex = getImageIndex(
-      state,
-      state.nextSequencePosition + offset
-    );
+    const imageIndex = getImageIndex(state, state.nextSequencePosition + offset);
 
     preloadImageByIndex(imageIndex);
   }
@@ -153,10 +142,7 @@ function createSlide(imageIndex) {
 }
 
 function getRequiredSlideCount(row) {
-  return (
-    Math.ceil(row.clientWidth / slideWidth) +
-    BUFFER_SLIDES
-  );
+  return Math.ceil(row.clientWidth / slideWidth) + BUFFER_SLIDES;
 }
 
 function getRowStepDuration(state) {
@@ -164,10 +150,7 @@ function getRowStepDuration(state) {
 }
 
 function appendNextSlide(state) {
-  const imageIndex = getImageIndex(
-    state,
-    state.nextSequencePosition
-  );
+  const imageIndex = getImageIndex(state, state.nextSequencePosition);
 
   state.track.appendChild(createSlide(imageIndex));
   state.nextSequencePosition += 1;
@@ -188,10 +171,7 @@ function recycleFirstSlide(state) {
     return;
   }
 
-  const nextImageIndex = getImageIndex(
-    state,
-    state.nextSequencePosition
-  );
+  const nextImageIndex = getImageIndex(state, state.nextSequencePosition);
 
   setSlideImage(firstSlide, nextImageIndex);
   state.nextSequencePosition += 1;
@@ -208,25 +188,23 @@ function startRowAnimation(state) {
   const animation = state.track.animate(
     [
       {
-        transform: "translate3d(0, 0, 0)"
+        transform: "translate3d(0, 0, 0)",
       },
       {
-        transform:
-          `translate3d(${-slideWidth}px, 0, 0)`
-      }
+        transform: `translate3d(${-slideWidth}px, 0, 0)`,
+      },
     ],
     {
       duration: getRowStepDuration(state),
       easing: "linear",
-      fill: "forwards"
-    }
+      fill: "forwards",
+    },
   );
 
   state.animation = animation;
 
   animation.finished
     .then(() => {
-
       if (state.animation !== animation) {
         return;
       }
@@ -235,19 +213,14 @@ function startRowAnimation(state) {
       recycleFirstSlide(state);
       startRowAnimation(state);
 
-      const shouldPause =
-        document.hidden ||
-        !carouselIsVisible ||
-        state.isHovered;
+      const shouldPause = document.hidden || !carouselIsVisible || state.isHovered;
 
       if (shouldPause) {
         state.animation.pause();
       }
     })
-    .catch(() => {
-    });
+    .catch(() => {});
 }
-
 
 function createRowState(config) {
   const row = document.createElement("div");
@@ -264,26 +237,18 @@ function createRowState(config) {
     track,
     speed: config.speed,
 
-    startIndex: Math.floor(
-      carouselImages.length * config.startRatio
-    ),
+    startIndex: Math.floor(carouselImages.length * config.startRatio),
 
-    step: findCoprimeStep(
-      carouselImages.length,
-      config.stepSeed
-    ),
+    step: findCoprimeStep(carouselImages.length, config.stepSeed),
 
     nextSequencePosition: 0,
     animation: null,
-    isHovered: false
+    isHovered: false,
   };
 
   fillTrack(state);
   preloadAhead(state);
   startRowAnimation(state);
-
-
-
 
   row.addEventListener("mouseenter", () => {
     state.isHovered = true;
@@ -294,7 +259,6 @@ function createRowState(config) {
     state.isHovered = false;
     applySystemPauseState();
   });
-
 
   return state;
 }
@@ -317,9 +281,7 @@ function buildCarousel() {
   }
 
   if (carouselImages.length === 0) {
-    console.error(
-      "Array CAROUSEL_IMAGES is empty or file images.js not loaded."
-    );
+    console.error("Array CAROUSEL_IMAGES is empty or file images.js not loaded.");
     return;
   }
 
@@ -335,13 +297,9 @@ function applySystemPauseState() {
     return;
   }
 
-  const shouldPause =
-    document.hidden || !carouselIsVisible;
+  const shouldPause = document.hidden || !carouselIsVisible;
 
-  carousel.classList.toggle(
-    "is-paused",
-    shouldPause
-  );
+  carousel.classList.toggle("is-paused", shouldPause);
 
   rowStates.forEach((state) => {
     if (!state.animation) {
@@ -379,8 +337,8 @@ const visibilityObserver = new IntersectionObserver(
     applySystemPauseState();
   },
   {
-    threshold: 0.01
-  }
+    threshold: 0.01,
+  },
 );
 
 updateLayoutMetrics();
@@ -390,16 +348,9 @@ if (carousel && rowStates.length > 0) {
   visibilityObserver.observe(carousel);
 }
 
-document.addEventListener(
-  "visibilitychange",
-  handleVisibilityChange
-);
+document.addEventListener("visibilitychange", handleVisibilityChange);
 
-window.addEventListener(
-  "resize",
-  handleResize,
-  { passive: true }
-);
+window.addEventListener("resize", handleResize, { passive: true });
 
 applySystemPauseState();
 
@@ -429,7 +380,7 @@ function openPopupImage(sourceImage) {
   if (!carousel) {
     return;
   }
- 
+
   if (popupImage) {
     closePopupImage();
   }
@@ -444,7 +395,7 @@ function openPopupImage(sourceImage) {
     left: startLeft,
     top: startTop,
     width: imageRect.width,
-    height: imageRect.height
+    height: imageRect.height,
   };
 
   const image = document.createElement("img");
@@ -461,21 +412,13 @@ function openPopupImage(sourceImage) {
   carousel.appendChild(image);
   popupImage = image;
 
-  const targetWidth = Math.min(
-    800,
-    carousel.clientWidth - 20
-  );
+  const targetWidth = Math.min(800, carousel.clientWidth - 20);
 
-  const targetHeight = Math.min(
-    600,
-    carousel.clientHeight - 20
-  );
+  const targetHeight = Math.min(600, carousel.clientHeight - 20);
 
-  const targetLeft =
-    (carousel.clientWidth - targetWidth) / 2;
+  const targetLeft = (carousel.clientWidth - targetWidth) / 2;
 
-  const targetTop =
-    (carousel.clientHeight - targetHeight) / 2;
+  const targetTop = (carousel.clientHeight - targetHeight) / 2;
 
   requestAnimationFrame(() => {
     image.style.left = `${targetLeft}px`;
@@ -484,12 +427,7 @@ function openPopupImage(sourceImage) {
     image.style.height = `${targetHeight}px`;
   });
 
-
-  image.addEventListener(
-    "click",
-    closePopupImage,
-    { once: true }
-  );
+  image.addEventListener("click", closePopupImage, { once: true });
 }
 
 carousel?.addEventListener("click", (event) => {

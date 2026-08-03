@@ -105,3 +105,16 @@ body {
 
   transform: translate(-50%, -50%) scale(1.25);
 }
+
+.footer{
+  display: flex;
+  justify-content: center;
+  margin: 1rem auto;
+}
+.footer a{
+  text-decoration: none;
+  color: #17D4FE;
+  font-family: "Oxanium", sans-serif;
+  font-weight: 500;
+ 
+}
