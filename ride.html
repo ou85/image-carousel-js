@@ -501,7 +501,6 @@
 
           if (this.type === 1) {
             // Shockwave
-
             ctx.strokeStyle = this.col;
             ctx.lineWidth = 2;
             ctx.beginPath();
@@ -614,12 +613,10 @@
             if (this.x > W - 80 || this.x < 80) this.dir *= -1;
 
             // Shoot Pattern
-
             if (Math.random() < 0.05) {
               AudioSys.playEnemyShoot();
 
               // Spread shot
-
               for (let i = -2; i <= 2; i++) Game.bullets.push(new Bullet(this.x, this.y + 40, true, i));
             }
           }
@@ -637,7 +634,6 @@
           ctx.lineWidth = 4;
 
           // Draw Dreadnought
-
           ctx.beginPath();
 
           ctx.moveTo(-60, -20);
@@ -652,7 +648,6 @@
           ctx.stroke();
 
           // Core ogic
-
           ctx.fillStyle = `rgba(255, 0, 0, ${0.5 + Math.sin(Date.now() / 100) * 0.5})`;
 
           ctx.beginPath();
@@ -708,11 +703,8 @@
           this.powerups = [];
 
           this.boss = null;
-
           this.nextWave();
-
           this.running = true;
-
           this.loop();
         },
 
@@ -725,11 +717,8 @@
 
           if (this.wave % 5 === 0) {
             // Boss Wave
-
             this.boss = new Boss();
-
             this.boss.maxHp = 500 * (this.wave / 5);
-
             this.boss.hp = this.boss.maxHp;
 
             document.getElementById("boss-hp-bar").style.display = "block";
@@ -741,9 +730,7 @@
             this.boss = null;
 
             const rows = 3 + Math.min(this.wave, 5);
-
             const cols = 4 + Math.min(this.wave, 4);
-
             const startX = (W - cols * 50) / 2;
 
             for (let r = 0; r < rows; r++) {
@@ -785,16 +772,12 @@
           if (!this.running) return;
 
           // Player
-
           if (!this.player.dead) {
             this.player.x += Input.joyX * 6;
-
             this.player.y += Input.joyY * 6;
 
             // Clamp
-
             this.player.x = Math.max(20, Math.min(W - 20, this.player.x));
-
             this.player.y = Math.max(H / 2, Math.min(H - 40, this.player.y));
 
             if (Input.shooting && !this.player.cooldown) {
@@ -806,11 +789,8 @@
                 this.bullets.push(new Bullet(this.player.x, this.player.y - 20, false));
               } else {
                 // Spread Shot
-
                 this.bullets.push(new Bullet(this.player.x, this.player.y - 20, false));
-
                 this.bullets.push(new Bullet(this.player.x - 10, this.player.y - 15, false, -1));
-
                 this.bullets.push(new Bullet(this.player.x + 10, this.player.y - 15, false, 1));
               }
             }
@@ -819,7 +799,6 @@
           }
 
           // Boss Ship
-
           if (this.boss) {
             this.boss.update();
 
@@ -831,7 +810,6 @@
           }
 
           // Enemies
-
           let activeEnemies = false;
 
           this.enemies.forEach((e) => {
@@ -840,7 +818,6 @@
             activeEnemies = true;
 
             // State Machine
-
             if (e.state === "enter") {
               e.y += (e.ty - e.y) * 0.05;
 
@@ -867,7 +844,6 @@
             }
 
             // Collision Player
-
             if (!this.player.dead && Math.abs(e.x - this.player.x) < 30 && Math.abs(e.y - this.player.y) < 30) {
               e.hp = 0;
               this.damagePlayer(20);
@@ -877,12 +853,10 @@
           if (!activeEnemies && !this.boss) this.nextWave();
 
           // Bullets
-
           this.bullets.forEach((b) => {
             b.update();
 
             // Hit Logic
-
             if (b.isEnemy) {
               if (!this.player.dead && Math.abs(b.x - this.player.x) < 20 && Math.abs(b.y - this.player.y) < 20) {
                 b.dead = true;
@@ -890,11 +864,9 @@
               }
             } else {
               // Hit Enemy
-
               let hit = false;
 
               // Check Boss
-
               if (this.boss && Math.abs(b.x - this.boss.x) < 60 && Math.abs(b.y - this.boss.y) < 40) {
                 this.boss.hp -= 10;
                 b.dead = true;
@@ -938,7 +910,6 @@
           this.bullets = this.bullets.filter((b) => !b.dead);
 
           // Powerups
-
           this.powerups.forEach((p) => {
             p.update();
 
@@ -956,7 +927,6 @@
               }
 
               // Remove powerup by moving offscreen
-
               p.y = H + 100;
             }
           });
@@ -973,7 +943,6 @@
             this.player.shield > 0 ? "#0f0" : this.player.hp < 30 ? "#f00" : "#0ff";
 
           // Glitch Decay
-
           if (glitchAmt > 0) glitchAmt--;
         },
 
@@ -1025,14 +994,12 @@
 
         draw() {
           // Chromatic Aberration Offset
-
           let ox = (Math.random() - 0.5) * glitchAmt;
 
           ctx.fillStyle = "#000";
           ctx.fillRect(0, 0, W, H);
 
           // Grid
-
           ctx.save();
           ctx.translate(ox, 0);
 
@@ -1044,14 +1011,12 @@
           ctx.beginPath();
 
           // Vertical Perspective
-
           for (let x = -W; x < W * 2; x += 80) {
             ctx.moveTo(x, H);
             ctx.lineTo((x - W / 2) * 0.1 + W / 2, 0);
           }
 
           // Horizontal moving
-
           for (let y = 0; y < H; y += 40) {
             let dy = (y + this.bgOffset) % H;
 
@@ -1066,14 +1031,12 @@
           ctx.stroke();
 
           // Render Entities
-
           ctx.globalCompositeOperation = "lighter";
-          // GLOW MODE
 
+          // GLOW MODE
           this.powerups.forEach((p) => p.draw());
 
           // Player
-
           if (!this.player.dead) {
             ctx.save();
             ctx.translate(this.player.x, this.player.y);
@@ -1095,7 +1058,6 @@
             ctx.stroke();
 
             // Thruster
-
             ctx.fillStyle = "#f0f";
             ctx.beginPath();
             ctx.moveTo(-5, 15);
@@ -1107,7 +1069,6 @@
           }
 
           // Enemies
-
           this.enemies.forEach((e) => {
             if (e.hp <= 0) return;
 
