@@ -19,40 +19,43 @@ body {
 }
 
 .clock {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    color: #17D4FE;
-    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px red;
-    font-size: 3rem;
+  color: #17d4fe;
+  text-shadow:
+    1px 1px 2px black,
+    0 0 25px blue,
+    0 0 5px red;
+  font-size: 3rem;
 
-    /* font-family: 'Orbitron', sans-serif; */
+  /* font-family: 'Orbitron', sans-serif; */
 
-        font-family: "Oxanium", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 500;
-        font-style: normal;
+  font-family: "Oxanium", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 
-    letter-spacing: 0.4rem;
+  letter-spacing: 0.4rem;
 
-    z-index: 1000;
+  z-index: 1000;
 
-    width: 16rem;
-    height: 9rem;
+  width: 16rem;
+  height: 9rem;
 
-    background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 0.55rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0.55rem;
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 
-    transition: scale 0.3s ease;
+  transition: scale 0.3s ease;
 
-    cursor: none !important;
+  cursor: none !important;
 }
 
 /* .clock:hover {
@@ -78,35 +81,28 @@ body {
     border-radius: 0.75rem;
 } */
 
-
 .clock:hover {
-	height: calc(100px + 4vw);
-	width: calc(150px + 10vw);
-	border: calc(1px + 0.2vw) solid transparent;
-	background-origin: border-box;
-	background-clip: content-box, border-box;
-	background-size: cover;
-	box-sizing: border-box;
-	box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
-  
-	border-radius: 1rem;
-  
-	--img-url: url(https://res.cloudinary.com/dacsww4tg/image/upload/c_fill,w_1800,h_400,f_auto,q_auto/v1708435805/wallpapers/1626032_k7drtw.png);
-	
+  height: calc(100px + 4vw);
+  width: calc(150px + 10vw);
+  border: calc(1px + 0.2vw) solid transparent;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  background-size: cover;
+  box-sizing: border-box;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+
+  border-radius: 1rem;
+
+  --img-url: url(https://res.cloudinary.com/dacsww4tg/image/upload/c_fill,w_1800,h_400,f_auto,q_auto/v1708435805/wallpapers/1626032_k7drtw.png);
+
   /* background-image: var(--img-url), linear-gradient(#f9f047, #0fd850); */
   /* background-image: var(--img-url), linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5); */
-  background-image: var(--img-url), linear-gradient( 
-      to bottom right,
-      #D60000,  
-      #56189C,
-      #304FFF, 
-      #00C752 
-    );
+  background-image: var(--img-url), linear-gradient(to bottom right, #d60000, #56189c, #304fff, #00c752);
 
   transform: translate(-50%, -50%) scale(1.25);
 }
 
-.footer{
+/* .footer{
   display: flex;
   justify-content: center;
   margin: 1rem auto;
@@ -117,5 +113,165 @@ body {
   color: #17D4FE;
   font-family: "Oxanium", sans-serif;
   font-weight: 500;
- 
+} */
+
+.footer {
+  position: fixed;
+  z-index: 1100;
+
+  left: 50%;
+  bottom: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  transform: translateX(-50%);
+
+  color: #17d4fe;
+
+  font-family: "Oxanium", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+
+  white-space: nowrap;
+}
+
+.footer a {
+  color: #17d4fe;
+  text-decoration: none;
+
+  text-shadow: 0 0 8px rgba(23, 212, 254, 0.55);
+
+  transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease;
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: #daf6ff;
+
+  text-shadow:
+    0 0 8px rgba(10, 175, 230, 1),
+    0 0 18px rgba(10, 175, 230, 0.8);
+
+  outline: none;
+}
+
+.footer span {
+  color: rgba(23, 212, 254, 0.45);
+  user-select: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+/* ==================================================
+   Большие часы
+   ================================================== */
+
+.big-clock {
+  position: fixed;
+  z-index: 900;
+
+  top: 50%;
+  left: 50%;
+
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: min(800px, calc(100vw - 48px));
+  aspect-ratio: 16 / 9;
+
+  padding: clamp(20px, 4vw, 60px);
+
+  color: #daf6ff;
+  /* background:
+		radial-gradient(
+			ellipse at center,
+			rgba(10, 46, 56, 0.96) 0%,
+			rgba(0, 0, 0, 0.98) 72%
+		); */
+
+  background-color: #0f3854;
+  background-image: radial-gradient(ellipse at center, #0a2e38 0%, #000 70%);
+  background-size: 100%;
+
+  border: 1px solid rgba(218, 246, 255, 0.15);
+  border-radius: 18px;
+
+  font-family: "Share Tech Mono", monospace;
+  text-align: center;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.65),
+    0 0 25px rgba(10, 175, 230, 0.12);
+
+  transform: translate(-50%, -50%) scale(0.96);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* Показ больших часов */
+
+.big-clock.is-visible {
+  display: flex;
+
+  opacity: 1;
+  pointer-events: auto;
+
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Время */
+
+.big-clock .time {
+  margin: 0;
+  padding: 0;
+
+  font-size: clamp(72px, 15vw, 210px);
+  line-height: 1;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 10px rgba(10, 175, 230, 0.9),
+    0 0 30px rgba(10, 175, 230, 0.75),
+    0 0 60px rgba(10, 175, 230, 0.35);
+}
+
+/* Дата */
+
+.big-clock .date {
+  margin: 0 0 clamp(15px, 3vw, 35px);
+
+  font-size: clamp(20px, 4vw, 48px);
+  letter-spacing: 0.12em;
+  white-space: nowrap;
+
+  text-shadow:
+    0 0 12px rgba(10, 175, 230, 0.8),
+    0 0 25px rgba(10, 175, 230, 0.35);
+}
+
+/* Скрытие маленьких часов */
+
+.clock.is-hidden {
+  display: none;
 }

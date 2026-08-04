@@ -17,6 +17,15 @@
     <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"> -->
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+
+
+
+
     <script src="images.js" defer></script>
     <script src="carousel.js" defer></script>
     <script src="clock.js" defer></script>
@@ -26,8 +35,28 @@
     <main class="page">
       <div class="carousel" id="carousel" aria-label="Image carousel"></div>
     </main>
-    <div class="footer">
-      <a href="ride.html?quality=low">LOW RIDE</a> <span> ::: </span> <a href="ride.html?quality=high">HIGH RIDE</a>
-    </div>
+
+ <div id="dclock" class="big-clock" v-cloak>
+	<p class="date">{{ date }}</p>
+	<p class="time">{{ time }}</p>
+</div>
+
+
+
+<div class="footer">
+	<a href="ride.html?quality=low">LOW RIDE</a>
+
+	<span>:::</span>
+
+	<a href="#" id="bigClockButton">BIG CLOCK</a>
+
+	<span>:::</span>
+
+	<a href="ride.html?quality=high">HIGH RIDE</a>
+</div>
+
+
+    <script src="vue.min.js"></script>
+    <script src="clock_digi.js"></script>
   </body>
 </html>

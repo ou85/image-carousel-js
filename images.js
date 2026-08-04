@@ -1,4 +1,5 @@
-const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/wallpapers/david-watkis-ttMBIEnFeKA-unsplash_f4ic1l.jpg",
+const images = [
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/wallpapers/david-watkis-ttMBIEnFeKA-unsplash_f4ic1l.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780450845/wallpapers/Aerial_view_of_elevated_pedestrian_bridge_through_a_forest_Henderson_Waves_Singapore_ngyur4.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780450834/wallpapers/Castlepoint_lighthouse_at_sunrise_Wellington_region_Wairarapa_North_Island_New_Zealand_zhgsbw.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1780450826/wallpapers/Mountain_valley_landscape_during_sunrise_at_summer_time_Carpathian_mountains_Ukraine_dqtkkw.jpg",
@@ -21,7 +22,7 @@ const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/w
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1710379027/wallpapers/ben-wicks-dvn-unsplash_zux.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708989503/wallpapers/wallhaven-nmyyq1_hyo5or.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1782863099/wallpapers/pexels-photo-982_oh1ey2.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1782861838/wallpapers/pizza-1875590410_qmtvv7.gif",
+  // "https://res.cloudinary.com/dacsww4tg/image/upload/v1782861838/wallpapers/pizza-1875590410_qmtvv7.gif",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1782861821/wallpapers/glass-ball-520_lbxigc.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708436285/wallpapers/Bing-1920x1200_lnuad4.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1782872592/wallpapers/3657598536_n_z5v2yl.jpg",
@@ -677,8 +678,8 @@ const images = ["https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/w
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435765/wallpapers/BingWallpaper-2018-12-07_rqauhb.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435764/wallpapers/BingWallpaper-2018-12-09_xhuy8k.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1708435763/wallpapers/BingWallpaper-2018-12-06_j_gxqjjw.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1782867118/wallpapers/cinque-terre-national-park_jpczu9.jpg"];
-
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1782867118/wallpapers/cinque-terre-national-park_jpczu9.jpg",
+];
 
 // Shuffle array function. Fisher–Yates, O(n)
 function shuffleArray(array) {
