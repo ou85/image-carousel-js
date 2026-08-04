@@ -1,23 +1,19 @@
 * {
   box-sizing: border-box;
 }
-
 html,
 body {
   min-height: 100%;
 }
-
 body {
   margin: 0;
   background: #222;
 }
-
 .page {
   min-height: 100vh;
   display: flex;
   align-items: center;
 }
-
 .clock {
   position: absolute;
   top: 50%;
@@ -80,7 +76,6 @@ body {
 
     border-radius: 0.75rem;
 } */
-
 .clock:hover {
   height: calc(100px + 4vw);
   width: calc(150px + 10vw);
@@ -101,20 +96,6 @@ body {
 
   transform: translate(-50%, -50%) scale(1.25);
 }
-
-/* .footer{
-  display: flex;
-  justify-content: center;
-  margin: 1rem auto;
-  color: #17D4FE;
-}
-.footer a{
-  text-decoration: none;
-  color: #17D4FE;
-  font-family: "Oxanium", sans-serif;
-  font-weight: 500;
-} */
-
 .footer {
   position: fixed;
   z-index: 1100;
@@ -138,7 +119,6 @@ body {
 
   white-space: nowrap;
 }
-
 .footer a {
   color: #17d4fe;
   text-decoration: none;
@@ -149,7 +129,6 @@ body {
     color 0.2s ease,
     text-shadow 0.2s ease;
 }
-
 .footer a:hover,
 .footer a:focus-visible {
   color: #daf6ff;
@@ -160,25 +139,19 @@ body {
 
   outline: none;
 }
-
 .footer span {
   color: rgba(23, 212, 254, 0.45);
   user-select: none;
 }
-
 p {
   margin: 0;
   padding: 0;
 }
-
 [v-cloak] {
   display: none;
 }
 
-/* ==================================================
-   Большие часы
-   ================================================== */
-
+/* BIG CLOCK  ======================= */
 .big-clock {
   position: fixed;
   z-index: 900;
@@ -227,9 +200,6 @@ p {
     opacity 0.3s ease,
     transform 0.3s ease;
 }
-
-/* Показ больших часов */
-
 .big-clock.is-visible {
   display: flex;
 
@@ -238,14 +208,11 @@ p {
 
   transform: translate(-50%, -50%) scale(1);
 }
-
-/* Время */
-
 .big-clock .time {
   margin: 0;
   padding: 0;
 
-  font-size: clamp(72px, 15vw, 210px);
+  font-size: clamp(50px, 10vw, 150px);
   line-height: 1;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -255,13 +222,10 @@ p {
     0 0 30px rgba(10, 175, 230, 0.75),
     0 0 60px rgba(10, 175, 230, 0.35);
 }
-
-/* Дата */
-
 .big-clock .date {
   margin: 0 0 clamp(15px, 3vw, 35px);
 
-  font-size: clamp(20px, 4vw, 48px);
+  font-size: clamp(16px, 2.5vw, 32px);
   letter-spacing: 0.12em;
   white-space: nowrap;
 
@@ -269,9 +233,6 @@ p {
     0 0 12px rgba(10, 175, 230, 0.8),
     0 0 25px rgba(10, 175, 230, 0.35);
 }
-
-/* Скрытие маленьких часов */
-
 .clock.is-hidden {
   display: none;
 }
