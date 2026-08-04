@@ -164,10 +164,11 @@ p {
   align-items: center;
   justify-content: center;
 
+  min-width: 260px;
   width: min(800px, calc(100vw - 48px));
   aspect-ratio: 16 / 9;
 
-  padding: clamp(20px, 4vw, 60px);
+  padding: clamp(5px, 2vw, 10px);
 
   color: #daf6ff;
   /* background:
@@ -212,7 +213,7 @@ p {
   margin: 0;
   padding: 0;
 
-  font-size: clamp(50px, 10vw, 150px);
+  font-size: clamp(50px, 20vw, 150px);
   line-height: 1;
   letter-spacing: 0.05em;
   white-space: nowrap;
@@ -225,7 +226,7 @@ p {
 .big-clock .date {
   margin: 0 0 clamp(15px, 3vw, 35px);
 
-  font-size: clamp(16px, 2.5vw, 32px);
+  font-size: clamp(16px, 4vw, 32px);
   letter-spacing: 0.12em;
   white-space: nowrap;
 
