@@ -1015,7 +1015,6 @@ const images = [ "https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695203/samples/landscapes/girl-urban-view.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695199/samples/ecommerce/analog-classic.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695207/samples/landscapes/beach-boat.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695205/samples/animals/three-dogs.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695200/samples/animals/reindeer.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695206/samples/people/bicycle.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695205/samples/people/jazz.jpg",
