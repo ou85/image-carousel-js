@@ -1015,12 +1015,13 @@ const images = [ "https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695203/samples/landscapes/girl-urban-view.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695199/samples/ecommerce/analog-classic.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695207/samples/landscapes/beach-boat.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695201/samples/food/fish-vegetables.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695200/samples/animals/reindeer.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695206/samples/people/bicycle.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695201/samples/food/pot-mussels.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695205/samples/people/jazz.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695199/samples/food/dessert.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695199/samples/animals/cat.jpg",
-  "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695204/samples/bike.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695202/samples/sheep.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695195/sample.jpg" ];
 
 // Shuffle array function. Fisher–Yates, O(n)
