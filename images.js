@@ -1034,6 +1034,15 @@ const images = [ "https://res.cloudinary.com/dacsww4tg/image/upload/v1708437128/
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1786002379/201-0133777877_y.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1786002380/203-0320094317_y.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1786002378/200-0133777878_y.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004826/561827-1608195744_byxznx.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004826/wp11371154-560676032_h51iyb.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004830/wp2043537-4265549419_luqcm8.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004837/arch-linux-1920-x-1200-w_gjbbda.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004850/linux-retro_3507_rqswmf.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004842/arch-33931_fungfi.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004843/kali-705756_ivsf1n.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004854/domo-0014_dsb8wh.jpg",
+  "https://res.cloudinary.com/dacsww4tg/image/upload/v1786004869/9K4aQE-2560191656_elx5sl.jpg",
   "https://res.cloudinary.com/dacsww4tg/image/upload/v1683695195/sample.jpg" ];
 
 // Shuffle array function. Fisher–Yates, O(n)
