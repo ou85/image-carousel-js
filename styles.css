@@ -76,6 +76,10 @@ body {
 
     border-radius: 0.75rem;
 } */
+
+
+/* -------------------------------------------
+
 .clock:hover,
 .clock.is-expanded {
   height: calc(100px + 4vw);
@@ -91,12 +95,68 @@ body {
 
   --img-url: url(https://res.cloudinary.com/dacsww4tg/image/upload/c_fill,w_1800,h_400,f_auto,q_auto/v1708435805/wallpapers/1626032_k7drtw.png);
 
-  /* background-image: var(--img-url), linear-gradient(#f9f047, #0fd850); */
-  /* background-image: var(--img-url), linear-gradient(to bottom right, #ff3cac, #562b7c, #2b86c5); */
   background-image: var(--img-url), linear-gradient(to bottom right, #d60000, #56189c, #304fff, #00c752);
 
   transform: translate(-50%, -50%) scale(1.25);
 }
+
+--------------------------------------- */
+
+.clock:hover,
+.clock.is-expanded {
+  height: calc(100px + 4vw);
+  width: calc(150px + 10vw);
+  border: calc(1px + 0.2vw) solid transparent;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  border-radius: 1rem;
+  /* --img-url: url(
+      https://res.cloudinary.com/dacsww4tg/image/upload/v1708435783/wallpapers/ubuntustudio_2004_e48zfo.png
+    );
+  background-image:
+    var(--img-url),
+    linear-gradient(
+      90deg,
+      #d60000,
+      #56189c,
+      #304fff,
+      #00c752,
+      #d60000
+    ); */
+
+  background-image:
+  linear-gradient(
+    135deg,
+    #01040a 0%,
+    #07111f 50%,
+    #1a0d2b 100%
+  ),
+  linear-gradient(
+    90deg,
+    #d60000,
+    #56189c,
+    #304fff,
+    #00c752,
+    #d60000
+  );
+
+  background-position: center, 0% 50%;
+  background-size: cover, 300% 300%;
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.clock.is-expanded {
+  animation: clock-border-move 3s linear infinite;
+}
+
+@keyframes clock-border-move {
+  0% { background-position: center, 0% 50%; }
+  100% { background-position: center, 100% 50%; }
+}
+
+/* ------------------------------------------- */
+
 .footer {
   position: fixed;
   z-index: 1100;
