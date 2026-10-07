@@ -38,6 +38,10 @@ const smallClock = document.querySelector("#clock");
 const bigClock = document.querySelector("#dclock");
 const bigClockButton = document.querySelector("#bigClockButton");
 
+smallClock?.addEventListener("click", () => {
+  smallClock.classList.toggle("is-expanded");
+});
+
 if (smallClock && bigClock && bigClockButton) {
   bigClockButton.addEventListener("click", (event) => {
     event.preventDefault();
