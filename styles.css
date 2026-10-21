@@ -82,7 +82,7 @@ body {
 
   border-radius: 1rem;
 
-  --img-url: url(https://res.cloudinary.com/dacsww4tg/image/upload/c_fill,w_1800,h_400,f_auto,q_auto/v1708435805/wallpapers/1626032_k7drtw.png);
+  --img-url: url(https://res.cloudinary.com/dacsww4tg/image/upload/c_fill,w_1800,h_400/f_auto/q_auto/v1708435805/wallpapers/1626032_k7drtw.png);
 
   background-image: var(--img-url), linear-gradient(to bottom right, #d60000, #56189c, #304fff, #00c752);
 

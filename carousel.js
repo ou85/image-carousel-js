@@ -1,7 +1,9 @@
 const carouselImages = Array.isArray(window.CAROUSEL_IMAGES) ? window.CAROUSEL_IMAGES : [];
 
 const BUFFER_SLIDES = 4;
-const PRELOAD_AHEAD_COUNT = 5;
+const PRELOAD_AHEAD_COUNT = 1;
+const CLOUDINARY_UPLOAD_MARKER = "/image/upload/";
+const THUMBNAIL_TRANSFORMATION = "c_fill,w_480,h_280/f_auto/q_auto";
 
 const rowConfigs = [
   {
@@ -74,30 +76,33 @@ function updateLayoutMetrics() {
   slideWidth = getCssNumber("--slide-width", 250);
 }
 
-function optimizeCloudinaryUrl(url) {
-  const marker = "/image/upload/";
+function transformCloudinaryUrl(url, transformation) {
+  const markerIndex = url.indexOf(CLOUDINARY_UPLOAD_MARKER);
 
-  if (!url.includes(marker)) {
+  if (markerIndex === -1) {
     return url;
   }
 
-  return url.replace(
-    marker,
-    // `${marker}c_fill,w_600,h_350,f_auto,q_auto/`
-    `${marker}c_fill,w_800,h_600,f_auto,q_auto/`,
-  );
+  const assetStart = markerIndex + CLOUDINARY_UPLOAD_MARKER.length;
+
+  // Only insert transformations into original, versioned delivery URLs.
+  if (!/^v\d+\//.test(url.slice(assetStart))) {
+    return url;
+  }
+
+  return `${url.slice(0, assetStart)}${transformation}/${url.slice(assetStart)}`;
 }
 
 function getImageIndex(state, sequencePosition) {
   return (state.startIndex + sequencePosition * state.step) % carouselImages.length;
 }
 
-function getOptimizedImageUrl(imageIndex) {
-  return optimizeCloudinaryUrl(carouselImages[imageIndex]);
+function getThumbnailUrl(imageIndex) {
+  return transformCloudinaryUrl(carouselImages[imageIndex], THUMBNAIL_TRANSFORMATION);
 }
 
 function preloadImageByIndex(imageIndex) {
-  const url = getOptimizedImageUrl(imageIndex);
+  const url = getThumbnailUrl(imageIndex);
 
   if (preloadedUrls.has(url)) {
     return;
@@ -120,8 +125,9 @@ function preloadAhead(state, count = PRELOAD_AHEAD_COUNT) {
 
 function setSlideImage(slide, imageIndex) {
   const image = slide.querySelector("img");
-  image.src = getOptimizedImageUrl(imageIndex);
+  image.src = getThumbnailUrl(imageIndex);
   image.alt = `Image ${imageIndex + 1}`;
+  image.dataset.imageIndex = String(imageIndex);
 }
 
 function createSlide(imageIndex) {
@@ -358,6 +364,7 @@ applySystemPauseState();
 
 let popupImage = null;
 let popupSourceRect = null;
+let popupDownloadLink = null;
 
 function closePopupImage() {
   if (!popupImage) {
@@ -370,6 +377,8 @@ function closePopupImage() {
   const imageToRemove = popupImage;
   popupImage = null;
   popupSourceRect = null;
+  popupDownloadLink?.remove();
+  popupDownloadLink = null;
 
   window.setTimeout(() => {
     imageToRemove.remove();
@@ -378,6 +387,12 @@ function closePopupImage() {
 
 function openPopupImage(sourceImage) {
   if (!carousel) {
+    return;
+  }
+
+  const imageIndex = Number(sourceImage.dataset.imageIndex);
+
+  if (!Number.isInteger(imageIndex) || imageIndex < 0 || imageIndex >= carouselImages.length) {
     return;
   }
 
@@ -400,8 +415,15 @@ function openPopupImage(sourceImage) {
 
   const image = document.createElement("img");
 
+  const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
+  const modalWidth = isSmallScreen ? 640 : 800;
+  const modalHeight = isSmallScreen ? 480 : 600;
+
   image.className = "carousel-popup-image";
-  image.src = sourceImage.currentSrc || sourceImage.src;
+  image.src = transformCloudinaryUrl(
+    carouselImages[imageIndex],
+    `c_fill,w_${modalWidth},h_${modalHeight}/f_auto/q_auto`,
+  );
   image.alt = sourceImage.alt || "";
 
   image.style.left = `${startLeft}px`;
@@ -412,19 +434,40 @@ function openPopupImage(sourceImage) {
   carousel.appendChild(image);
   popupImage = image;
 
-  const targetWidth = Math.min(800, carousel.clientWidth - 20);
-
-  const targetHeight = Math.min(600, carousel.clientHeight - 20);
+  const scale = Math.min(
+    1,
+    (carousel.clientWidth - 20) / modalWidth,
+    (carousel.clientHeight - 20) / modalHeight,
+  );
+  const targetWidth = modalWidth * scale;
+  const targetHeight = modalHeight * scale;
 
   const targetLeft = (carousel.clientWidth - targetWidth) / 2;
 
   const targetTop = (carousel.clientHeight - targetHeight) / 2;
+
+  const downloadLink = document.createElement("a");
+  const downloadIcon = document.createElement("span");
+
+  downloadLink.className = "carousel-popup-download";
+  downloadLink.href = transformCloudinaryUrl(carouselImages[imageIndex], "fl_attachment");
+  downloadLink.setAttribute("aria-label", "Download original image");
+  downloadLink.title = "Download original image";
+  downloadIcon.className = "carousel-popup-download-icon";
+  downloadIcon.setAttribute("aria-hidden", "true");
+  downloadLink.appendChild(downloadIcon);
+  downloadLink.style.left = `${targetLeft + targetWidth - 52}px`;
+  downloadLink.style.top = `${targetTop + 10}px`;
+
+  carousel.appendChild(downloadLink);
+  popupDownloadLink = downloadLink;
 
   requestAnimationFrame(() => {
     image.style.left = `${targetLeft}px`;
     image.style.top = `${targetTop}px`;
     image.style.width = `${targetWidth}px`;
     image.style.height = `${targetHeight}px`;
+    downloadLink.style.opacity = "1";
   });
 
   image.addEventListener("click", closePopupImage, { once: true });
