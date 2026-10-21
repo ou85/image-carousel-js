@@ -1,6 +1,6 @@
 const carouselImages = Array.isArray(window.CAROUSEL_IMAGES) ? window.CAROUSEL_IMAGES : [];
 
-const BUFFER_SLIDES = 4;
+const BUFFER_SLIDES = 2;
 const PRELOAD_AHEAD_COUNT = 1;
 const CLOUDINARY_UPLOAD_MARKER = "/image/upload/";
 const THUMBNAIL_TRANSFORMATION = "c_fill,w_480,h_280/f_auto/q_auto";
@@ -170,6 +170,17 @@ function fillTrack(state) {
   }
 }
 
+function resizeTrack(state) {
+  const requiredCount = getRequiredSlideCount(state.row);
+
+  while (state.track.children.length > requiredCount) {
+    state.track.lastElementChild.remove();
+    state.nextSequencePosition -= 1;
+  }
+
+  fillTrack(state);
+}
+
 function recycleFirstSlide(state) {
   const firstSlide = state.track.firstElementChild;
 
@@ -330,8 +341,22 @@ function handleResize() {
   }
 
   resizeFrameId = requestAnimationFrame(() => {
+    const previousSlideWidth = slideWidth;
     updateLayoutMetrics();
-    buildCarousel();
+
+    rowStates.forEach((state) => {
+      resizeTrack(state);
+
+      if (slideWidth !== previousSlideWidth) {
+        const previousDuration = (previousSlideWidth / state.speed) * 1000;
+        const progress = Math.min(1, (state.animation?.currentTime || 0) / previousDuration);
+
+        startRowAnimation(state);
+        state.animation.currentTime = progress * getRowStepDuration(state);
+      }
+    });
+
+    updatePopupLayout();
     applySystemPauseState();
     resizeFrameId = null;
   });
@@ -363,8 +388,8 @@ applySystemPauseState();
 // ====================================================================
 
 let popupImage = null;
-let popupSourceRect = null;
 let popupDownloadLink = null;
+let popupImageIndex = null;
 
 function closePopupImage() {
   if (!popupImage) {
@@ -376,13 +401,56 @@ function closePopupImage() {
 
   const imageToRemove = popupImage;
   popupImage = null;
-  popupSourceRect = null;
+  popupImageIndex = null;
   popupDownloadLink?.remove();
   popupDownloadLink = null;
 
   window.setTimeout(() => {
     imageToRemove.remove();
   }, 200);
+}
+
+function getPopupDimensions() {
+  return window.matchMedia("(max-width: 600px)").matches
+    ? { width: 640, height: 480 }
+    : { width: 800, height: 600 };
+}
+
+function updatePopupLayout() {
+  if (!popupImage || !carousel) {
+    return;
+  }
+
+  const { width, height } = getPopupDimensions();
+  const url = transformCloudinaryUrl(
+    carouselImages[popupImageIndex],
+    `c_fill,w_${width},h_${height}/f_auto/q_auto`,
+  );
+
+  if (popupImage.src !== url) {
+    popupImage.src = url;
+  }
+
+  const scale = Math.min(
+    1,
+    (carousel.clientWidth - 20) / width,
+    (carousel.clientHeight - 20) / height,
+  );
+  const targetWidth = width * scale;
+  const targetHeight = height * scale;
+  const targetLeft = (carousel.clientWidth - targetWidth) / 2;
+  const targetTop = (carousel.clientHeight - targetHeight) / 2;
+
+  popupImage.style.left = `${targetLeft}px`;
+  popupImage.style.top = `${targetTop}px`;
+  popupImage.style.width = `${targetWidth}px`;
+  popupImage.style.height = `${targetHeight}px`;
+
+  if (popupDownloadLink) {
+    popupDownloadLink.style.left = `${targetLeft + targetWidth - 52}px`;
+    popupDownloadLink.style.top = `${targetTop + 10}px`;
+    popupDownloadLink.style.opacity = "1";
+  }
 }
 
 function openPopupImage(sourceImage) {
@@ -406,23 +474,13 @@ function openPopupImage(sourceImage) {
   const startLeft = imageRect.left - carouselRect.left;
   const startTop = imageRect.top - carouselRect.top;
 
-  popupSourceRect = {
-    left: startLeft,
-    top: startTop,
-    width: imageRect.width,
-    height: imageRect.height,
-  };
-
   const image = document.createElement("img");
-
-  const isSmallScreen = window.matchMedia("(max-width: 600px)").matches;
-  const modalWidth = isSmallScreen ? 640 : 800;
-  const modalHeight = isSmallScreen ? 480 : 600;
+  const { width, height } = getPopupDimensions();
 
   image.className = "carousel-popup-image";
   image.src = transformCloudinaryUrl(
     carouselImages[imageIndex],
-    `c_fill,w_${modalWidth},h_${modalHeight}/f_auto/q_auto`,
+    `c_fill,w_${width},h_${height}/f_auto/q_auto`,
   );
   image.alt = sourceImage.alt || "";
 
@@ -433,18 +491,7 @@ function openPopupImage(sourceImage) {
 
   carousel.appendChild(image);
   popupImage = image;
-
-  const scale = Math.min(
-    1,
-    (carousel.clientWidth - 20) / modalWidth,
-    (carousel.clientHeight - 20) / modalHeight,
-  );
-  const targetWidth = modalWidth * scale;
-  const targetHeight = modalHeight * scale;
-
-  const targetLeft = (carousel.clientWidth - targetWidth) / 2;
-
-  const targetTop = (carousel.clientHeight - targetHeight) / 2;
+  popupImageIndex = imageIndex;
 
   const downloadLink = document.createElement("a");
   const downloadIcon = document.createElement("span");
@@ -456,18 +503,14 @@ function openPopupImage(sourceImage) {
   downloadIcon.className = "carousel-popup-download-icon";
   downloadIcon.setAttribute("aria-hidden", "true");
   downloadLink.appendChild(downloadIcon);
-  downloadLink.style.left = `${targetLeft + targetWidth - 52}px`;
-  downloadLink.style.top = `${targetTop + 10}px`;
 
   carousel.appendChild(downloadLink);
   popupDownloadLink = downloadLink;
 
   requestAnimationFrame(() => {
-    image.style.left = `${targetLeft}px`;
-    image.style.top = `${targetTop}px`;
-    image.style.width = `${targetWidth}px`;
-    image.style.height = `${targetHeight}px`;
-    downloadLink.style.opacity = "1";
+    if (popupImage === image) {
+      updatePopupLayout();
+    }
   });
 
   image.addEventListener("click", closePopupImage, { once: true });
